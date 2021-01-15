@@ -26,15 +26,8 @@ def run_tests():
     # more tests, as appropriate, for each method
     movie_test = Movie("Star Wars: Episode IV - A New Hope", 1997, "action", True)
     print(movie_test)
-    movie_test.title = "Citizen Kane"
-    movie_test.year = 1941
-    movie_test.category = "Drama"
-    movie_test.is_watched = False
-    assert movie_test.title == "Citizen Kane"
-    assert movie_test.year == 1941
-    assert movie_test.category == "Drama"
-    assert not movie_test.is_watched
+    movie_test.unwatch()
     print(movie_test)
-
-
+    movie_test.watch()
+    print(movie_test)
 run_tests()
