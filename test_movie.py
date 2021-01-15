@@ -30,4 +30,6 @@ def run_tests():
     print(movie_test)
     movie_test.watch()
     print(movie_test)
+
+
 run_tests()

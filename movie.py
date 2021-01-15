@@ -16,9 +16,9 @@ class Movie:
         return "{}, {}, {}, {}".format(self.title, self.year, self.category, self.is_watched)
 
     def watch(self):
-        self.is_watched=True
+        self.is_watched = True
         return self.is_watched
 
     def unwatch(self):
-        self.is_watched=False
+        self.is_watched = False
         return self.is_watched
