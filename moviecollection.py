@@ -1,7 +1,7 @@
 """MovieCollection class"""
 
 from movie import Movie
-from operator import itemgetter
+from operator import attrgetter
 
 
 class MovieCollection:
@@ -20,7 +20,7 @@ class MovieCollection:
             return "no movie collection yet"
         else:
             for i, movie in enumerate(self.movies):
-                movies += ("{} - {}\n".format(i, movie))
+                movies += ("{} - {}".format(i, movie))
             return movies
 
     def add_movie(self, movie=Movie):
@@ -62,11 +62,11 @@ class MovieCollection:
         output_file = open(movie_file, "w")
         movies = ""
         for movie in self.movies:
-            movies += "{}\n".format(movie)
+            movies += "{}".format(movie)
         print(movies, file=output_file)
         output_file.close()
 
-    def sort(self):
-        """sort the movies by year than by title"""
-        self.movies.sort(key=itemgetter(1, 2))
+    def sort(self, key):
+        """sort the movies by key than by title"""
+        self.movies.sort(key=attrgetter(key,"title"))
         return self.movies

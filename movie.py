@@ -7,7 +7,7 @@ class Movie:
     def __init__(self, title="", year=0, category="", is_watched="u"):
         """initialise a Movie"""
         self.title = title
-        self.year = year
+        self.year = int(year)
         self.category = category
         self.is_watched = is_watched
 
