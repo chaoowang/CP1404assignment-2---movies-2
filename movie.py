@@ -4,7 +4,7 @@
 class Movie:
     """represent a Movie object"""
 
-    def __init__(self, title="", year=0, category="", is_watched=False):
+    def __init__(self, title="", year=0, category="", is_watched="u"):
         """initialise a Movie"""
         self.title = title
         self.year = year
@@ -16,9 +16,9 @@ class Movie:
         return "{}, {}, {}, {}".format(self.title, self.year, self.category, self.is_watched)
 
     def watch(self):
-        self.is_watched = True
+        self.is_watched = "w"
         return self.is_watched
 
     def unwatch(self):
-        self.is_watched = False
+        self.is_watched = "u"
         return self.is_watched
