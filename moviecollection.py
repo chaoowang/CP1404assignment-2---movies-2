@@ -12,6 +12,7 @@ class MovieCollection:
         self.movies = []
         self.number_of_unwatched_movie = 0
         self.number_of_watched_movie = 0
+        self.number_of_movie = 0
 
     def __str__(self):
         """return a string representative of a MovieCollection"""
@@ -44,6 +45,13 @@ class MovieCollection:
                 number_of_watched_movie += 1
         self.number_of_watched_movie = number_of_watched_movie
         return self.number_of_watched_movie
+
+    def get_number_of_movie(self):
+        number_of_watched_movie = self.get_number_of_watched_movie()
+        number_of_unwatched_movie = self.get_number_of_unwatched_movie()
+        number_of_movie = number_of_watched_movie + number_of_unwatched_movie
+        self.number_of_movie = number_of_movie
+        return self.number_of_movie
 
     def load_movies(self, movie_file):
         """load the movie file"""
