@@ -9,7 +9,7 @@ class Movie:
         self.title = title
         self.year = int(year)
         self.category = category
-        if is_watched==False or is_watched==True:
+        if is_watched == False or is_watched == True:
             pass
         elif is_watched == "w" or is_watched == "w\n":
             is_watched = True

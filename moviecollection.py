@@ -25,7 +25,8 @@ class MovieCollection:
                     is_watched = " "
                 else:
                     is_watched = "*"
-                movies += ("{}. {} {:<35} - {:>4} ({})\n".format(i, is_watched, movie.title, movie.year, movie.category))
+                movies += (
+                    "{}. {} {:<35} - {:>4} ({})\n".format(i, is_watched, movie.title, movie.year, movie.category))
             return movies
 
     def add_movie(self, movie=Movie):

@@ -103,7 +103,8 @@ def add_movie(movies):
 def list_movie(movies):
     num_of_watched_movies = movies.get_number_of_watched_movie()
     num_of_unwatched_movies = movies.get_number_of_unwatched_movie()
-    print("{}{} movies watched, {} movies still to watch".format(movies, num_of_watched_movies, num_of_unwatched_movies))
+    print(
+        "{}{} movies watched, {} movies still to watch".format(movies, num_of_watched_movies, num_of_unwatched_movies))
 
 
 if __name__ == '__main__':
