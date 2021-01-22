@@ -38,10 +38,11 @@ def run_tests():
     movie_collection.watch_movie(1)
     movie_collection.watch_movie(4)
     print(movie_collection)
-    unwatched_movie=movie_collection.get_number_of_unwatched_movie()
-    watched_movie=movie_collection.get_number_of_watched_movie()
+    unwatched_movie = movie_collection.get_number_of_unwatched_movie()
+    watched_movie = movie_collection.get_number_of_watched_movie()
     print("{} movies watched, {} movies unwatched".format(watched_movie, unwatched_movie))
-    total_numer_of_movie=movie_collection.get_number_of_movie()
-    print("Total {} movies.".format(total_numer_of_movie))
+    total_number_of_movie = movie_collection.get_number_of_movie()
+    print("Total {} movies.".format(total_number_of_movie))
+
 
 run_tests()
