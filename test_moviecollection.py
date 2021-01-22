@@ -27,7 +27,7 @@ def run_tests():
     print("Test sorting - year:")
     movie_collection.sort("year")
     print(movie_collection)
-    # TODO: Add more sorting tests
+    # Add more sorting tests
     print("Test sorting - category:")
     movie_collection.sort("category")
     print(movie_collection)
@@ -41,6 +41,7 @@ def run_tests():
     unwatched_movie=movie_collection.get_number_of_unwatched_movie()
     watched_movie=movie_collection.get_number_of_watched_movie()
     print("{} movies watched, {} movies unwatched".format(watched_movie, unwatched_movie))
-
+    total_numer_of_movie=movie_collection.get_number_of_movie()
+    print("Total {} movies.".format(total_numer_of_movie))
 
 run_tests()
