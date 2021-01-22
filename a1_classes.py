@@ -2,24 +2,21 @@
 assignment 1 - movies
 Name: Chao-Hsuan Wang
 """
-# TODO: Copy your first assignment to this file, then update it to use Movie class
-# Optionally, you may also use MovieCollection class
 
 from movie import Movie
-from operator import itemgetter
+from moviecollection import MovieCollection
 
 MENU = "Menu:\nL - List movies\nA - Add new movie\nW - Watch a movie\nQ - Quit"
 
 
 def main():
-    print("Movies To Watch 1.0 - by Chao-Hsuan Wang")
+    print("Movies To Watch 2.0 - by Chao-Hsuan Wang")
 
-    read_movie_file = open("movies.csv", "r")  # open movie to read
-    movie_index, movie_list, number_of_line = load_file(read_movie_file)  # load file
-    read_movie_file.close()
-    print("{} movies loaded".format(number_of_line))
-
-    movie_to_watch, num_movie_watched = count_movies_watch(movie_list)  # count how many movies watched/unwatched
+    movies = MovieCollection()
+    movies.load_movies('movies.csv')
+    movies.sort("year")
+    movies.get_number_of_movie()
+    print("{} movies loaded".format(movies.number_of_movie))
 
     print(MENU)
     menu_choice = input("").lower()
@@ -30,29 +27,25 @@ def main():
             print(MENU)
             menu_choice = input("").lower()
         if menu_choice == "l":  # list movies
-            list_movie(movie_list, movie_to_watch, num_movie_watched)
+            list_movie(movies)
             print(MENU)
             menu_choice = input("").lower()
 
         elif menu_choice == "a":  # add new movie including: title, year, category
-            add_movie(movie_index, movie_list)
-            resort_movies(movie_list)
+            add_movie(movies)
             print(MENU)
             menu_choice = input("").lower()
 
         elif menu_choice == "w":  # watch a movie
-            watch_a_movie(movie_list, movie_to_watch)
+            watch_a_movie(movies)
             print(MENU)
             menu_choice = input("").lower()
         elif menu_choice == "q":
             pass
-        movie_to_watch, num_movie_watched = count_movies_watch(movie_list)
 
-    output_movie_file = open("movies.csv", "w")
-    save_to_file(output_movie_file, movie_list)
-    output_movie_file.close()
+    movies.save_movies("movies.csv")
 
-    print("{} movies saved to movies.csv".format(len(movie_list)))
+    print("{} movies saved to movies.csv".format(movies.get_number_of_watched_movie()+movies.get_number_of_unwatched_movie()))
     print("Have a nice day :)")
 
 
@@ -67,48 +60,31 @@ def save_to_file(output_movie_file, movie_list):
         print(movie_info, file=output_movie_file)
 
 
-def watch_a_movie(movie_list, movie_to_watch):
-    if movie_to_watch == 0:
+def watch_a_movie(movies):
+    if movies.get_number_of_unwatched_movie() == 0:
         print("No more movies to watch!")
     else:
         print("Enter the number of movie to mark as watched")
-        movie_watched = input()
-        watched_check = False
-        while watched_check == False:  # error checking for movie number watched
+        movie = input()
+        has_watched = False
+        while not has_watched:  # error checking for movie number watched
             try:
-                movie_watched = int(movie_watched)
-                if movie_watched >= len(movie_list):
+                movie = int(movie)
+                if movie >= movies.get_number_of_movie():
                     print("Invalid movie number")
-                    movie_watched = input()
-                elif movie_watched < 0:
+                    movie = input()
+                elif movie < 0:
                     print("Number must be >= 0")
-                    movie_watched = input()
+                    movie = input()
                 else:
-                    watched_check = True
+                    has_watched = True
             except ValueError:
                 print("Invalid input; enter a valid number")
-                movie_watched = input()
-
-        for movie in movie_list:  # watch a movie
-            if int(movie_watched) == movie[0]:
-                if movie[4] == " ":
-                    print("You have already watched {}".format(movie[1]))
-                else:
-                    print("{} from {} watched".format(movie[1], movie[2]))
-                    movie[4] = " "
+                movie = input()
+        movies.watch_movie(movie)
 
 
-def resort_movies(movie_list):
-    for movie in movie_list:  # reorder movies after new movie added
-        movie.pop(0)  # remove old movie number
-    movie_list.sort(key=itemgetter(1, 2))  # resort movies
-    new_index = 0
-    for movie in movie_list:  # add new new movie number
-        movie.insert(0, new_index)
-        new_index += 1
-
-
-def add_movie(movie_index, movie_list):
+def add_movie(movies):
     movie_title = input("Title:")
     while movie_title.strip() == "":  # error checking for title
         print("Input can not be blank")
@@ -130,48 +106,16 @@ def add_movie(movie_index, movie_list):
     while movie_category.strip() == "":  # error checking for category
         print("Input can not be blank")
         movie_category = input("Category:")
-    movie_list.append(
-        [movie_index, movie_title, movie_year, movie_category, "*"])  # add new movie to movie list
+    movies.add_movie(Movie(movie_title, movie_year, movie_category, False))
+    movies.sort("year")
     print("{} ({} from {}) added to movie list".format(movie_title, movie_category, movie_year))
-    movie_index += 1
 
 
-def list_movie(movie_list, movie_to_watch, num_movie_watched):
-    for line in movie_list:
-        print(" {}. {} {:<35} - {:>4} ({})".format(line[0], line[4], line[1], line[2], line[3]))
-    print("{} movies watched, {} movies still to watch".format(num_movie_watched, movie_to_watch))
-
-
-def count_movies_watch(movie_list):
-    movie_to_watch = 0
-    num_movie_watched = 0
-    for line in movie_list:
-        if line[4] == "*":  # count how many movies watched and how many to watch
-            movie_to_watch += 1
-        else:
-            num_movie_watched += 1
-    return movie_to_watch, num_movie_watched
-
-
-def load_file(movie_file):
-    movie_list = []
-    number_of_line = 0
-    movie_index = 0
-    lines = movie_file.readlines()  # read all lines in movie file
-    for line in lines:
-        movie = line.split(",")
-        movie[1] = int(movie[1])  # convert year into int
-        if movie[3] == "u\n" or movie[3] == "u":
-            movie[3] = "*"  # "*"=unwatch; " "=watched
-        else:
-            movie[3] = " "
-        movie_list.append(movie)
-        number_of_line += 1  # count how many movies loaded
-    movie_list.sort(key=itemgetter(1, 2)) #sort movie by year then by title
-    for movie in movie_list:  # add movie number
-        movie.insert(0, movie_index)
-        movie_index += 1
-    return movie_index, movie_list, number_of_line
+def list_movie(movies):
+    print(movies)
+    num_of_watched_movies = movies.get_number_of_watched_movie()
+    num_of_unwatched_movies = movies.get_number_of_unwatched_movie()
+    print("{} movies watched, {} movies still to watch".format(num_of_watched_movies, num_of_unwatched_movies))
 
 
 if __name__ == '__main__':
