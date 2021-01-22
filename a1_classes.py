@@ -45,7 +45,8 @@ def main():
 
     movies.save_movies("movies.csv")
 
-    print("{} movies saved to movies.csv".format(movies.get_number_of_watched_movie()+movies.get_number_of_unwatched_movie()))
+    print("{} movies saved to movies.csv".format(
+        movies.get_number_of_watched_movie() + movies.get_number_of_unwatched_movie()))
     print("Have a nice day :)")
 
 
@@ -91,7 +92,7 @@ def add_movie(movies):
         movie_title = input("Title:")
     movie_year = input("Year:")
     year_check = False
-    while year_check == False:  # error checking for year
+    while not year_check:  # error checking for year
         try:
             movie_year = int(movie_year)
             if movie_year < 0:
