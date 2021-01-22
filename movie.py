@@ -9,12 +9,12 @@ class Movie:
         self.title = title
         self.year = int(year)
         self.category = category
-        if is_watched==False or is_watched==True:
+        if not is_watched or is_watched:
             pass
-        elif is_watched=="w":
-            is_watched=True
+        elif is_watched == "w":
+            is_watched = True
         else:
-            is_watched=False
+            is_watched = False
         self.is_watched = is_watched
 
     def __str__(self):
