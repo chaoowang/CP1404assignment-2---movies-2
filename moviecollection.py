@@ -21,7 +21,11 @@ class MovieCollection:
             return "no movie collection yet"
         else:
             for i, movie in enumerate(self.movies):
-                movies += ("{} - {}\n".format(i, movie))
+                if movie.is_watched:
+                    is_watched = " "
+                else:
+                    is_watched = "*"
+                movies += ("{}. {} {:<35} - {:>4} ({})\n".format(i, is_watched, movie.title, movie.year, movie.category))
             return movies
 
     def add_movie(self, movie=Movie):
