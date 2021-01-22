@@ -50,6 +50,7 @@ def main():
 
 
 def watch_a_movie(movies):
+    """mark a movie as watched"""
     if movies.get_number_of_unwatched_movie() == 0:
         print("No more movies to watch!")
     else:
@@ -74,6 +75,7 @@ def watch_a_movie(movies):
 
 
 def add_movie(movies):
+    """add a movie to movie list"""
     movie_title = input("Title: ")
     while movie_title.strip() == "":  # error checking for title
         print("Input can not be blank")
@@ -101,6 +103,7 @@ def add_movie(movies):
 
 
 def list_movie(movies):
+    """display the movie list"""
     num_of_watched_movies = movies.get_number_of_watched_movie()
     num_of_unwatched_movies = movies.get_number_of_unwatched_movie()
     print(

@@ -43,7 +43,7 @@ class MovieCollection:
         return self.number_of_unwatched_movie
 
     def get_number_of_watched_movie(self):
-        """get the number of watched movie"""
+        """get the number of watched movies"""
         number_of_watched_movie = 0
         for movie in self.movies:
             if movie.is_watched:
@@ -52,6 +52,7 @@ class MovieCollection:
         return self.number_of_watched_movie
 
     def get_number_of_movie(self):
+        """get the number of movies"""
         number_of_watched_movie = self.get_number_of_watched_movie()
         number_of_unwatched_movie = self.get_number_of_unwatched_movie()
         number_of_movie = number_of_watched_movie + number_of_unwatched_movie
