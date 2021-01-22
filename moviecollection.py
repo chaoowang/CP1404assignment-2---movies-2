@@ -59,13 +59,9 @@ class MovieCollection:
         lines = input_file.readlines()
         for line in lines:
             movie = line.split(",")
-            if not movie[3]:
-                self.number_of_unwatched_movie += 1
-            else:
-                self.number_of_watched_movie += 1
             self.movies.append(Movie(movie[0], movie[1], movie[2], movie[3]))
         input_file.close()
-        return self.movies, self.number_of_watched_movie, self.number_of_unwatched_movie
+        return self.movies
 
     def save_movies(self, movie_file):
         """save movie collection to the file"""

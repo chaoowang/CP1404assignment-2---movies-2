@@ -24,7 +24,7 @@ def run_tests():
     assert initial_movie.is_watched
 
     # more tests, as appropriate, for each method
-    movie_test = Movie("Star Wars: Episode IV - A New Hope", 1997, "action", True)
+    movie_test = Movie("Star Wars: Episode IV - A New Hope", 1997, "action", "u")
     print(movie_test)
     movie_test.unwatch()
     print(movie_test)
