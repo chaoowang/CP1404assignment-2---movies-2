@@ -5,7 +5,10 @@ BoxLayout:
         Label:
             text:"Sort by"
         Spinner:
-
+            id:sort
+            text:""
+            values:["title", "year", "category"]
+            on_text:app.sort(self.text)
         Label:
             text:"Add new movie"
         Label:

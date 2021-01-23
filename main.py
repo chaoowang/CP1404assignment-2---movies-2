@@ -9,7 +9,6 @@ GitHub URL: https://github.com/JCUS-CP1404/assignment-2---movies-2-chaoowang
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.button import Button
-from kivy.properties import StringProperty
 from movie import Movie
 from moviecollection import MovieCollection
 
@@ -86,6 +85,12 @@ class MoviesToWatchApp(App):
         self.root.ids.year.text = ""
         self.root.ids.category.text = ""
         self.root.ids.app_status.text="Clear all fields"
+
+    def sort(self, key):
+        self.movies.sort(key)
+        self.root.ids.movie_list.clear_widgets()
+        self.list_movie()
+        self.root.ids.app_status.text = "Sort by {}".format(key)
 
 if __name__ == '__main__':
     MoviesToWatchApp().run()
