@@ -3,6 +3,9 @@
 from movie import Movie
 from operator import attrgetter
 
+WATCHED = "w"
+UNWATCHED = "u"
+
 
 class MovieCollection:
     """represent a MovieCollection"""
@@ -21,9 +24,11 @@ class MovieCollection:
             return "no movie collection yet"
         else:
             for i, movie in enumerate(self.movies):
+                # format the movie list
                 if movie.is_watched:
                     is_watched = " "
                 else:
+                    # display a * if movie are unwatched
                     is_watched = "*"
                 movies += (
                     "{}. {} {:<35} - {:>4} ({})\n".format(i, is_watched, movie.title, movie.year, movie.category))
@@ -34,7 +39,7 @@ class MovieCollection:
         self.movies.append(movie)
 
     def get_number_of_unwatched_movie(self):
-        """get the number of unwatched movies"""
+        """count unwatched movies"""
         number_of_unwatched_movie = 0
         for movie in self.movies:
             if not movie.is_watched:
@@ -43,7 +48,7 @@ class MovieCollection:
         return self.number_of_unwatched_movie
 
     def get_number_of_watched_movie(self):
-        """get the number of watched movies"""
+        """count watched movies"""
         number_of_watched_movie = 0
         for movie in self.movies:
             if movie.is_watched:
@@ -52,7 +57,7 @@ class MovieCollection:
         return self.number_of_watched_movie
 
     def get_number_of_movie(self):
-        """get the number of movies"""
+        """count movies"""
         number_of_watched_movie = self.get_number_of_watched_movie()
         number_of_unwatched_movie = self.get_number_of_unwatched_movie()
         number_of_movie = number_of_watched_movie + number_of_unwatched_movie
@@ -77,10 +82,11 @@ class MovieCollection:
         output_file = open(movie_file, "w")
         movies = ""
         for movie in self.movies:
+            # format the movies
             if movie.is_watched:
-                movie.is_watched = "w"
+                movie.is_watched = WATCHED
             else:
-                movie.is_watched = "u"
+                movie.is_watched = UNWATCHED
             movies += "{}\n".format(movie)
         print(movies, file=output_file)
         output_file.close()

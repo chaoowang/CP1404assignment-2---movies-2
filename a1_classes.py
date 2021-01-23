@@ -7,13 +7,14 @@ from movie import Movie
 from moviecollection import MovieCollection
 
 MENU = "Menu:\nL - List movies\nA - Add new movie\nW - Watch a movie\nQ - Quit"
+FILE = 'movies.csv'
 
 
 def main():
     print("Movies To Watch 2.0 - by Chao-Hsuan Wang")
 
     movies = MovieCollection()
-    movies.load_movies('movies.csv')
+    movies.load_movies(FILE)
     movies.sort("year")
     movies.get_number_of_movie()
     print("{} movies loaded".format(movies.number_of_movie))
@@ -43,9 +44,9 @@ def main():
         elif menu_choice == "q":
             pass
 
-    movies.save_movies("movies.csv")
+    movies.save_movies(FILE)
 
-    print("{} movies saved to movies.csv".format(movies.get_number_of_movie()))
+    print("{} movies saved to {}".format(movies.get_number_of_movie(), FILE))
     print("Have a nice day :)")
 
 
@@ -59,11 +60,14 @@ def watch_a_movie(movies):
         has_watched = False
         while not has_watched:  # error checking for movie number watched
             try:
+                # check if input number is number
                 movie = int(movie)
                 if movie >= movies.get_number_of_movie():
+                    # check if input number is valid
                     print("Invalid movie number")
                     movie = input(">>> ")
                 elif movie < 0:
+                    # check if input number is positive number
                     print("Number must be >= 0")
                     movie = input(">>> ")
                 else:
@@ -84,8 +88,10 @@ def add_movie(movies):
     year_check = False
     while not year_check:  # error checking for year
         try:
+            # check if input year is number
             movie_year = int(movie_year)
             if movie_year < 0:
+                # check if input is positive number
                 print("Number must be >= 0")
                 movie_year = input("Year: ")
             else:
@@ -104,6 +110,7 @@ def add_movie(movies):
 
 def list_movie(movies):
     """display the movie list"""
+    # count how many movies unwatched/to watched
     num_of_watched_movies = movies.get_number_of_watched_movie()
     num_of_unwatched_movies = movies.get_number_of_unwatched_movie()
     print(
