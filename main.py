@@ -33,10 +33,10 @@ class MoviesToWatchApp(App):
             movie_button = Button()
             if movie.is_watched:
                 is_watched = "watched"
-                movie_button.background_color=(1, 0.5, 0.5, 1)
+                movie_button.background_color=(0.5, 0.5, 0.5, 1)
             else:
                 is_watched = ""
-                movie_button.background_color=(0.5, 0.5, 0.5, 1)
+                movie_button.background_color=(1, 0.5, 0.5, 1)
             movie_button.text = "{} ({} from {}){}".format(str(movie.title), str(movie.category), str(movie.year),
                                                            is_watched)
             movie_button.id = i
