@@ -65,7 +65,10 @@ class MovieCollection:
         lines = input_file.readlines()
         for line in lines:
             movie = line.split(",")
-            self.movies.append(Movie(movie[0], movie[1], movie[2], movie[3]))
+            try:
+                self.movies.append(Movie(movie[0], movie[1], movie[2], movie[3]))
+            except IndexError:
+                pass
         input_file.close()
         return self.movies
 
