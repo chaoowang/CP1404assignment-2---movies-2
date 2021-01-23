@@ -12,16 +12,20 @@ BoxLayout:
             text:"Title"
         TextInput:
             multiline: False
+            id:title
         Label:
             text:"Category"
         TextInput:
             multiline: False
+            id:category
         Label:
             text:"Year"
         TextInput:
             multiline: False
+            id:year
         Button:
-            text:"Add movie"
+            text:"Add New Movie..."
+            on_press:app.add_movie(title.text, year.text, category.text)
         Button:
             text:"clear"
     BoxLayout:

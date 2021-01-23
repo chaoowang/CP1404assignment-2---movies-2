@@ -33,10 +33,10 @@ class MoviesToWatchApp(App):
             movie_button = Button()
             if movie.is_watched:
                 is_watched = "watched"
-                movie_button.background_color=(0.5, 0.5, 0.5, 1)
+                movie_button.background_color = (0.5, 0.5, 0.5, 1)
             else:
                 is_watched = ""
-                movie_button.background_color=(1, 0.5, 0.5, 1)
+                movie_button.background_color = (1, 0.5, 0.5, 1)
             movie_button.text = "{} ({} from {}){}".format(str(movie.title), str(movie.category), str(movie.year),
                                                            is_watched)
             movie_button.id = i
@@ -64,6 +64,21 @@ class MoviesToWatchApp(App):
                     self.list_movie()
                     self.root.ids.app_status.text = "You have watched {}".format(str(movie.title))
 
+    def add_movie(self, title, year, category):
+        try:
+            if title.strip() == "" or category.strip() == "" or year.strip() == "":
+                self.root.ids.app_status.text = "All fields must be completed"
+            else:
+                year = int(year)
+                if year < 0:
+                    self.root.ids.app_status.text = "Please enter a valid number"
+                else:
+                    self.movies.add_movie(Movie(title, year, category))
+                    self.root.ids.movie_list.clear_widgets()
+                    self.list_movie()
+                    self.root.ids.app_status.text = "{} ({} from {}) added to movie list".format(title, category, year)
+        except ValueError:
+            self.root.ids.app_status.text = "Please enter a valid number"
 
 
 if __name__ == '__main__':
