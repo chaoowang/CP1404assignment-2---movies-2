@@ -92,5 +92,9 @@ class MoviesToWatchApp(App):
         self.list_movie()
         self.root.ids.app_status.text = "Sort by {}".format(key)
 
+    def on_stop(self):
+        self.movies.save_movies('movies.csv')
+
+
 if __name__ == '__main__':
     MoviesToWatchApp().run()
