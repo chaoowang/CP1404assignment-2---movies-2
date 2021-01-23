@@ -76,10 +76,16 @@ class MoviesToWatchApp(App):
                     self.movies.add_movie(Movie(title, year, category))
                     self.root.ids.movie_list.clear_widgets()
                     self.list_movie()
+                    self.clear()
                     self.root.ids.app_status.text = "{} ({} from {}) added to movie list".format(title, category, year)
         except ValueError:
             self.root.ids.app_status.text = "Please enter a valid number"
 
+    def clear(self):
+        self.root.ids.title.text = ""
+        self.root.ids.year.text = ""
+        self.root.ids.category.text = ""
+        self.root.ids.app_status.text="Clear all fields"
 
 if __name__ == '__main__':
     MoviesToWatchApp().run()

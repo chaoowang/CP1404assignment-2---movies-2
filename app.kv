@@ -27,7 +27,8 @@ BoxLayout:
             text:"Add New Movie..."
             on_press:app.add_movie(title.text, year.text, category.text)
         Button:
-            text:"clear"
+            text:"Clear"
+            on_press:app.clear()
     BoxLayout:
         orientation: 'vertical'
         Label:
