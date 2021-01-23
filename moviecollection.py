@@ -74,6 +74,10 @@ class MovieCollection:
         output_file = open(movie_file, "w")
         movies = ""
         for movie in self.movies:
+            if movie.is_watched:
+                movie.is_watched = "w"
+            else:
+                movie.is_watched = "u"
             movies += "{}\n".format(movie)
         print(movies, file=output_file)
         output_file.close()
